@@ -29,11 +29,31 @@ const app = props => {
     });
   }
 
+  const nameChangeHandler = (event) => {
+    setPersonsState({
+      persons: [
+        {name: 'James', age: 34},
+        {name: event.target.value, age: 29},
+        {name: 'Stephanie', age: 26}
+      ],
+    });
+  }
+
+  const style = {
+    backgroundColor:'white',
+    font: 'inherit',
+    border: '1px solid blue',
+    padding: '8px',
+    cursor: 'pointer'
+  };
+
   return (
     <div className="App">
       <h1> Hi, Im a  react app </h1>
       <p> This really works </p>
-      <button onClick={() => switchNameHandler('James')}>Switch Name</button>
+      <button
+        style={style}
+        onClick={() => switchNameHandler('James')}>Switch Name</button>
       {/* //onClick switchHandler without () as dont want it called straight away only after the click.  UPDATE: with the aarow function, can be inefficient */}
       <Person
         name={personsState.persons[0].name}
@@ -41,7 +61,8 @@ const app = props => {
       <Person
         name={personsState.persons[1].name}
         age={personsState.persons[1].age}
-        click={switchNameHandler.bind(this, 'Jamesssss')} > My Hobbies: Racing </Person>
+        click={switchNameHandler.bind(this, 'Jamesssss')}
+        changed={nameChangeHandler}> My Hobbies: Racing </Person>
       <Person
         name={personsState.persons[2].name}
         age={personsState.persons[2].age} />
