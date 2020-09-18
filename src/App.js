@@ -16,12 +16,12 @@ const app = props => {
 
   console.log(personsState, otherState);
 
-  const switchNameHandler = () => {
+  const switchNameHandler = (newName) => {
     //console.log('was clicked');
     //DONT DO THIS: this.state.persons[0].name = 'Maximilian';
     setPersonsState({
       persons: [
-        {name: 'James', age: 34},
+        {name: newName, age: 34},
         {name: 'Manu', age: 29},
         {name: 'Stephanie', age: 26}
       ],
@@ -33,11 +33,18 @@ const app = props => {
     <div className="App">
       <h1> Hi, Im a  react app </h1>
       <p> This really works </p>
-      <button onClick={switchNameHandler}>Switch Name</button>
-      {/* //onClick switchHandler without () as dont want it called straight away only after the click. */}
-      <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
-      <Person name={personsState.persons[1].name} age={personsState.persons[1].age}> My Hobbies: Racing </Person>
-      <Person name={personsState.persons[2].name} age={personsState.persons[2].age} />
+      <button onClick={() => switchNameHandler('James')}>Switch Name</button>
+      {/* //onClick switchHandler without () as dont want it called straight away only after the click.  UPDATE: with the aarow function, can be inefficient */}
+      <Person
+        name={personsState.persons[0].name}
+        age={personsState.persons[0].age}/>
+      <Person
+        name={personsState.persons[1].name}
+        age={personsState.persons[1].age}
+        click={switchNameHandler.bind(this, 'Jamesssss')} > My Hobbies: Racing </Person>
+      <Person
+        name={personsState.persons[2].name}
+        age={personsState.persons[2].age} />
     </div>
   );
   // return React.createElement('div', {className:"App"}, React.createElement('h1', null, 'Does this work now?'));
